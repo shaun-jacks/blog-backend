@@ -20,7 +20,7 @@ connection
   .on("error", console.log)
   .on("disconnected", mongoConnect)
   .once("open", async () => {
-    const PORT = process.env.port || "3000";
+    const PORT = process.env.PORT || "3000";
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
   });
 
