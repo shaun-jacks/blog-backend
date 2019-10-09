@@ -14,7 +14,7 @@ router.post("/:slug", authorizeRoute, async (req, res) => {
     body
   });
   comment = await comment.save();
-  return res.status(200).send("Successful Comment!");
+  return res.status(200).json(comment);
 });
 
 router.get("/:slug", async (req, res) => {
