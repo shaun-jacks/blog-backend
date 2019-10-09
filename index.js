@@ -51,7 +51,7 @@ app.use("/api/auth/facebook", authFacebook);
 app.use("/api/auth/google", authGoogle);
 
 // Comment routes
-app.use("/api/comment", cors(corsOptions), comments);
+app.use("/api/comment", comments);
 
 app.get("/", (req, res) => {
   return res.status(200).send("Hello!");
