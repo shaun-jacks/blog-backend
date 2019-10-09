@@ -19,6 +19,7 @@ router.post("/:slug", authorizeRoute, async (req, res) => {
 
 router.get("/:slug", async (req, res) => {
   const { slug } = req.params;
+  console.log(slug);
   let comments = await Comment.find({
     slug
   }).exec();

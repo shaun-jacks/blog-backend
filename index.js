@@ -7,7 +7,11 @@ const helmet = require("helmet");
 require("./config/auth/facebook");
 require("./config/auth/google");
 
-var whitelist = ["http://localhost:8000", "devshaun.netlify.com"];
+var whitelist = [
+  "http://localhost:8000",
+  "http://localhost",
+  "devshaun.netlify.com"
+];
 var corsOptions = {
   origin: function(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
