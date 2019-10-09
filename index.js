@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const config = require("../config/config");
+const config = require("./config/config");
 const mongoConnect = require("./models/index");
 const passport = require("passport");
 const helmet = require("helmet");
