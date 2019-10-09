@@ -1,7 +1,6 @@
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook").Strategy;
 const User = require("../../models/user");
-const config = require("../config");
 const _ = require("lodash");
 
 passport.use(
