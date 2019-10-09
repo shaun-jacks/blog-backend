@@ -1,15 +1,14 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../../models/user");
-const config = require("../config");
 const _ = require("lodash");
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: config.auth.google.clientId,
-      clientSecret: config.auth.google.clientSecret,
-      callbackURL: config.auth.google.callbackURL,
+      clientID: process.env.googleClientId,
+      clientSecret: process.env.googleClientSecret,
+      callbackURL: process.env.googleCallbackUrl,
       profileFields: ["id", "displayName", "email"]
     },
     async function(accessToken, refreshToken, profile, done) {

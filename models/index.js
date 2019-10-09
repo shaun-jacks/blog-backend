@@ -8,6 +8,6 @@ module.exports = () => {
     useNewUrlParser: true,
     useUnifiedTopology: true
   };
-  mongoose.connect(config.mongodb.url, options);
+  mongoose.connect(process.env.mongodbUrl, options);
   return mongoose.connection;
 };

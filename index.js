@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const config = require("./config/config");
 const mongoConnect = require("./models/index");
 const passport = require("passport");
 const helmet = require("helmet");
@@ -20,7 +19,7 @@ connection
   .on("error", console.log)
   .on("disconnected", mongoConnect)
   .once("open", async () => {
-    const PORT = config.http.port || "3000";
+    const PORT = process.env.port || "3000";
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
   });
 

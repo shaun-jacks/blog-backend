@@ -34,7 +34,7 @@ UserSchema.methods.generateAuthToken = async function() {
       id: this._id,
       name: this.name
     },
-    config.token.secret,
+    process.env.secret,
     {
       expiresIn: "12h"
     }

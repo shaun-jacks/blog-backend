@@ -7,9 +7,9 @@ const _ = require("lodash");
 passport.use(
   new FacebookStrategy(
     {
-      clientID: config.auth.facebook.clientId,
-      clientSecret: config.auth.facebook.clientSecret,
-      callbackURL: config.auth.facebook.callbackURL,
+      clientID: process.env.facebookClientId,
+      clientSecret: process.env.facebookClientSecret,
+      callbackURL: process.env.facebookCallbackUrl,
       profileFields: ["id", "displayName", "email"]
     },
     async function(accessToken, refreshToken, profile, done) {
