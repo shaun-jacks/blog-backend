@@ -1,11 +1,23 @@
 const express = require("express");
 const app = express();
-
+const cors = require("cors");
 const mongoConnect = require("./models/index");
 const passport = require("passport");
 const helmet = require("helmet");
 require("./config/auth/facebook");
 require("./config/auth/google");
+
+var whitelist = ["http://localhost:3000", "devshaun.netlify.com"];
+var corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+app.use(cors(corsOptions));
 
 // auth routes
 const authFacebook = require("./routes/api/auth/facebook");
