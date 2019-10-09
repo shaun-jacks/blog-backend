@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 module.exports = () => {
   // DB Connection
   const options = {
-    keepAlive: 1,
     useNewUrlParser: true,
     useUnifiedTopology: true
   };

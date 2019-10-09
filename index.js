@@ -11,7 +11,7 @@ require("./config/auth/google");
 const authFacebook = require("./routes/api/auth/facebook");
 const authGoogle = require("./routes/api/auth/google");
 
-// Comment route
+// Comment routes
 const comments = require("./routes/api/comment");
 
 // Initialize db connection
