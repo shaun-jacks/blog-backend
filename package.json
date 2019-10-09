@@ -1,0 +1,33 @@
+{
+  "name": "blog-backend",
+  "version": "1.0.0",
+  "description": "Backend for Shaun Jackson's Blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaun-jacks/blog-backend.git"
+  },
+  "author": "Shaun Jackson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaun-jacks/blog-backend/issues"
+  },
+  "homepage": "https://github.com/shaun-jacks/blog-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.3",
+    "nodemailer": "^6.3.1",
+    "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "engines": {
+    "node": "12.x"
+  }
+}
