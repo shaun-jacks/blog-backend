@@ -4,14 +4,14 @@ const cors = require("cors");
 const mongoConnect = require("./models/index");
 const passport = require("passport");
 const helmet = require("helmet");
+require("dotenv").config();
 require("./config/auth/facebook");
 require("./config/auth/google");
 
 var whitelist = [
   "http://localhost:8000",
   "http://localhost",
-  "devshaun.netlify.com",
-  "*"
+  "devshaun.netlify.com"
 ];
 var corsOptions = {
   origin: function(origin, callback) {
@@ -50,6 +50,22 @@ app.use(helmet());
 // Authentication routes
 app.use("/api/auth/facebook", authFacebook);
 app.use("/api/auth/google", authGoogle);
+
+app.use(function(req, res, next) {
+  const allowedOrigins = [
+    "http://127.0.0.1:8000",
+    "https://devshaun.netlify.com"
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 // Comment routes
 app.use("/api/comment", comments);
