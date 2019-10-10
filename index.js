@@ -10,7 +10,8 @@ require("./config/auth/google");
 var whitelist = [
   "http://localhost:8000",
   "http://localhost",
-  "devshaun.netlify.com"
+  "devshaun.netlify.com",
+  "*"
 ];
 var corsOptions = {
   origin: function(origin, callback) {
@@ -51,7 +52,7 @@ app.use("/api/auth/facebook", authFacebook);
 app.use("/api/auth/google", authGoogle);
 
 // Comment routes
-app.use("/api/comment", comments);
+app.use("/api/comment", corsOptions, comments);
 
 app.get("/", (req, res) => {
   return res.status(200).send("Hello!");
