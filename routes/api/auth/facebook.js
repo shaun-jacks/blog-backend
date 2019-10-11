@@ -4,6 +4,10 @@ const passport = require("passport");
 
 router.get(
   "/",
+  (req, res, next) => {
+    console.log("HERE");
+    next();
+  },
   passport.authenticate("facebook", { scope: ["email"], session: false })
 );
 
@@ -16,7 +20,7 @@ router.get(
   }),
   async (req, res) => {
     const token = await req.user.generateAuthToken();
-    res.send(token);
+    return res.header("x-auth-token", token).redirect("http://localhost:8000");
   }
 );
 

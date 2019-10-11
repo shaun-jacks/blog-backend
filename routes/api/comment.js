@@ -24,8 +24,7 @@ router.get("/:slug", async (req, res) => {
     slug
   }).exec();
   console.log(comments);
-  const allComments = await Comment.find({});
-  console.log(allComments);
+
   return res.status(200).json(comments);
 });
 

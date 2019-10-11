@@ -13,16 +13,26 @@ var whitelist = [
   "http://localhost",
   "devshaun.netlify.com"
 ];
+// var corsOptions = {
+//   origin: function(origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   }
+// };
+
 var corsOptions = {
-  origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
+  origin: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  exposedHeaders: ["x-auth-token"]
 };
 
+// const corsOptions = {
+//   credentials: true,
+// };
 // auth routes
 const authFacebook = require("./routes/api/auth/facebook");
 const authGoogle = require("./routes/api/auth/google");
@@ -40,6 +50,15 @@ connection
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
   });
 
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:8000");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
@@ -50,22 +69,6 @@ app.use(helmet());
 // Authentication routes
 app.use("/api/auth/facebook", authFacebook);
 app.use("/api/auth/google", authGoogle);
-
-app.use(function(req, res, next) {
-  const allowedOrigins = [
-    "http://127.0.0.1:8000",
-    "https://devshaun.netlify.com"
-  ];
-  const origin = req.headers.origin;
-  if (allowedOrigins.indexOf(origin) > -1) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 
 // Comment routes
 app.use("/api/comment", comments);
