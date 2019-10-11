@@ -1,17 +1,17 @@
 const passport = require("passport");
-const FacebookStrategy = require("passport-facebook").Strategy;
+const FacebookTokenStrategy = require("passport-facebook-token");
 const User = require("../../models/user");
 const _ = require("lodash");
 
 passport.use(
-  new FacebookStrategy(
+  "facebookToken",
+  new FacebookTokenStrategy(
     {
       clientID: process.env.facebookClientId,
       clientSecret: process.env.facebookClientSecret,
-      callbackURL: process.env.facebookCallbackUrl,
-      profileFields: ["id", "displayName", "email"]
+      passReqToCallback: true
     },
-    async function(accessToken, refreshToken, profile, done) {
+    async function(req, accessToken, refreshToken, profile, done) {
       console.log("FACEBOOK OAUTH CALLED");
       console.log(profile);
       const providerID = profile.id;
@@ -35,6 +35,12 @@ passport.use(
         });
         user = await user.save();
         console.log(user);
+        // Generate token
+        const token = signToken(user);
+        res.cookie("access_token", token, {
+          httpOnly: true
+        });
+        res.status(200).json({ success: true });
         return done(null, user);
       }
       // pass user to req object

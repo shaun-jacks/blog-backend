@@ -4,6 +4,12 @@ const cors = require("cors");
 const mongoConnect = require("./models/index");
 const passport = require("passport");
 const helmet = require("helmet");
+const https = require("https");
+const fs = require("fs");
+const axios = require("axios");
+
+// const privateKey = fs.readFileSync("../../../../../server.key");
+// const certificate = fs.readFileSync("../../../../../server.crt");
 require("dotenv").config();
 require("./config/auth/facebook");
 require("./config/auth/google");
@@ -47,6 +53,16 @@ connection
   .on("disconnected", mongoConnect)
   .once("open", async () => {
     const PORT = process.env.PORT || "3000";
+    // https
+    //   .createServer(
+    //     {
+    //       key: privateKey,
+    //       cert: certificate,
+    //       passphrase: process.env.passphrase
+    //     },
+    //     app
+    //   )
+    //   .listen(PORT);
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
   });
 
@@ -73,6 +89,12 @@ app.use("/api/auth/google", authGoogle);
 // Comment routes
 app.use("/api/comment", comments);
 
-app.get("/", (req, res) => {
-  return res.status(200).send("Hello!");
+app.get("/", async (req, res) => {
+  try {
+    res.redirect("http://localhost:3000/api/auth/facebook");
+  } catch (err) {
+    console.log(err);
+  }
+
+  // return res.status(200).send("Hello!");
 });

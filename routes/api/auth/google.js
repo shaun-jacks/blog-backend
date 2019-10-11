@@ -2,22 +2,21 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-router.get(
+router.post(
   "/",
-  passport.authenticate("google", {
-    session: false,
-    scope: ["profile", "email"]
-  })
-);
-
-router.get(
-  "/callback",
-  passport.authenticate("google", {
+  (req, res, next) => {
+    console.log("HERE");
+    next();
+  },
+  passport.authenticate("google-token", {
     session: false
   }),
   async (req, res) => {
     const token = await req.user.generateAuthToken();
-    res.send(token);
+    res
+      .header("x-auth-token", token)
+      .status(200)
+      .json({ success: true });
   }
 );
 

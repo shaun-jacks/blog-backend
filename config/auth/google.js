@@ -1,17 +1,19 @@
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const GoogleTokenStrategy = require("passport-token-google").Strategy;
 const User = require("../../models/user");
 const _ = require("lodash");
 
 passport.use(
-  new GoogleStrategy(
+  "google-token",
+  new GoogleTokenStrategy(
     {
       clientID: process.env.googleClientId,
       clientSecret: process.env.googleClientSecret,
-      callbackURL: process.env.googleCallbackUrl,
-      profileFields: ["id", "displayName", "email"]
+      passReqToCallback: true
     },
-    async function(accessToken, refreshToken, profile, done) {
+    async function(req, accessToken, refreshToken, profile, done) {
+      console.log("HERE");
+      console.log(profile);
       const providerID = profile.id;
       const email = profile.emails[0].value;
       const name = profile.displayName;
