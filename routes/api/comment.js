@@ -7,6 +7,8 @@ router.post("/:slug", authorizeRoute, async (req, res) => {
   const { name, id } = req.user;
   const { slug } = req.params;
   const { body } = req.body;
+  console.log(slug);
+  console.log(body);
   let comment = new Comment({
     name,
     userId: id,
@@ -22,7 +24,9 @@ router.get("/:slug", async (req, res) => {
   console.log(slug);
   let comments = await Comment.find({
     slug
-  }).exec();
+  })
+    .sort("field -updatedAt")
+    .exec();
   console.log(comments);
 
   return res.status(200).json(comments);

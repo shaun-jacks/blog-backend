@@ -35,12 +35,6 @@ passport.use(
         });
         user = await user.save();
         console.log(user);
-        // Generate token
-        const token = signToken(user);
-        res.cookie("access_token", token, {
-          httpOnly: true
-        });
-        res.status(200).json({ success: true });
         return done(null, user);
       }
       // pass user to req object
