@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Email = require("../../models/email");
-const Joi = require("@hapi/Joi");
+const Joi = require("@hapi/joi");
 
 // Create login form validation
 const emailSchema = Joi.object().keys({
