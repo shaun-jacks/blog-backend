@@ -14,21 +14,21 @@ require("dotenv").config();
 require("./config/auth/facebook");
 require("./config/auth/google");
 
-// var whitelist = [
-//   "https://localhost:8000",
-//   "http://localhost:8000",
-//   "http://localhost",
-//   "https://devshaun.netlify.com"
-// ];
+const whitelist = [
+  "https://localhost:8000",
+  "http://localhost:8000",
+  "http://localhost",
+  "https://devshaun.netlify.com"
+];
 
 // var corsOptions = {
-//   origin: function(origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
+// origin: function(origin, callback) {
+//   if (whitelist.indexOf(origin) !== -1) {
+//     callback(null, true);
+//   } else {
+//     callback(new Error("Not allowed by CORS"));
+//   }
+// },
 //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 //   credentials: true,
 //   exposedHeaders: ["x-auth-token"]

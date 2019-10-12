@@ -28,6 +28,7 @@ router.post("/", async (req, res) => {
       body
     });
     email = await email.save();
+    console.log(email);
     console.log("SUCCESS /api/email");
     return res.status(200).json(email);
   } catch (error) {
