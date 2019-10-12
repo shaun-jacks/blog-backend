@@ -21,25 +21,25 @@ var whitelist = [
   "https://devshaun.netlify.com"
 ];
 
-var corsOptions = {
-  origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  exposedHeaders: ["x-auth-token"]
-};
-
 // var corsOptions = {
-//   origin: true,
+//   origin: function(origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
 //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 //   credentials: true,
 //   exposedHeaders: ["x-auth-token"]
 // };
+
+var corsOptions = {
+  origin: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  exposedHeaders: ["x-auth-token"]
+};
 
 // const corsOptions = {
 //   credentials: true,
