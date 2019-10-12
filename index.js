@@ -14,12 +14,12 @@ require("dotenv").config();
 require("./config/auth/facebook");
 require("./config/auth/google");
 
-var whitelist = [
-  "https://localhost:8000",
-  "http://localhost:8000",
-  "http://localhost",
-  "https://devshaun.netlify.com"
-];
+// var whitelist = [
+//   "https://localhost:8000",
+//   "http://localhost:8000",
+//   "http://localhost",
+//   "https://devshaun.netlify.com"
+// ];
 
 // var corsOptions = {
 //   origin: function(origin, callback) {
@@ -35,9 +35,8 @@ var whitelist = [
 // };
 
 var corsOptions = {
-  origin: true,
+  origin: "https://devshaun.netlify.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
   exposedHeaders: ["x-auth-token"]
 };
 

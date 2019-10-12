@@ -15,7 +15,9 @@ const emailSchema = Joi.object().keys({
 router.post("/", async (req, res) => {
   let { name, email, body } = req.body;
   const { error } = emailSchema.validate({ name, email, body });
+  console.log("/api/email");
   if (error) {
+    console.log("error occurred", error);
     const errMsg = error.details[0].message;
     return res.status(401).send({ error: errMsg });
   }
@@ -26,6 +28,7 @@ router.post("/", async (req, res) => {
       body
     });
     email = await email.save();
+    console.log("SUCCESS /api/email");
     return res.status(200).json(email);
   } catch (error) {
     console.log(error);
