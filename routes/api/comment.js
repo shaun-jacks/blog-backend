@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authorizeRoute } = require("../../middleware/auth");
 const Comment = require("../../models/Comment");
+import Joi from "@hapi/joi";
 
 // Create comment validation
 const commentSchema = Joi.object().keys({
