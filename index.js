@@ -15,26 +15,31 @@ require("./config/auth/facebook");
 require("./config/auth/google");
 
 var whitelist = [
+  "https://localhost:8000",
   "http://localhost:8000",
   "http://localhost",
-  "devshaun.netlify.com"
+  "https://devshaun.netlify.com"
 ];
-// var corsOptions = {
-//   origin: function(origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   }
-// };
 
 var corsOptions = {
-  origin: true,
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   exposedHeaders: ["x-auth-token"]
 };
+
+// var corsOptions = {
+//   origin: true,
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   credentials: true,
+//   exposedHeaders: ["x-auth-token"]
+// };
 
 // const corsOptions = {
 //   credentials: true,
@@ -45,6 +50,9 @@ const authGoogle = require("./routes/api/auth/google");
 
 // Comment routes
 const comments = require("./routes/api/comment");
+
+// Email routes
+const email = require("./routes/api/email");
 
 // Initialize db connection
 const connection = mongoConnect();
@@ -88,13 +96,9 @@ app.use("/api/auth/google", authGoogle);
 
 // Comment routes
 app.use("/api/comment", comments);
+// Email routes
+app.use("/api/email", email);
 
 app.get("/", async (req, res) => {
-  try {
-    res.redirect("http://localhost:3000/api/auth/facebook");
-  } catch (err) {
-    console.log(err);
-  }
-
-  // return res.status(200).send("Hello!");
+  return res.status(200).send("Hello!");
 });
