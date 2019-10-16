@@ -35,7 +35,7 @@ const whitelist = [
 // };
 
 var corsOptions = {
-  origin: "https://devshaun.netlify.com",
+  origin: "https://shaunjacks.com",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   exposedHeaders: ["x-auth-token"]
 };
