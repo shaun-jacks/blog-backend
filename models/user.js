@@ -14,7 +14,7 @@ const UserSchema = new Schema(
     facebook: {
       id: { type: String, default: "" },
       name: { type: String, default: "" },
-      profileUrl: { type: String, required: [true, "Must have photo url"] }
+      profileUrl: { type: String, default: "" }
     },
     google: {
       id: { type: String, default: "" },
