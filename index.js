@@ -11,6 +11,13 @@ const axios = require("axios");
 // const privateKey = fs.readFileSync("../../../../../server.key");
 // const certificate = fs.readFileSync("../../../../../server.crt");
 require("dotenv").config();
+var corsOptions = {
+  origin: "https://shaunjacks.com",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  exposedHeaders: ["x-auth-token"]
+};
+app.use(cors(corsOptions));
+
 require("./config/auth/facebook");
 require("./config/auth/google");
 
@@ -33,12 +40,6 @@ const whitelist = [
 //   credentials: true,
 //   exposedHeaders: ["x-auth-token"]
 // };
-
-var corsOptions = {
-  origin: "https://shaunjacks.com",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  exposedHeaders: ["x-auth-token"]
-};
 
 // const corsOptions = {
 //   credentials: true,
@@ -81,7 +82,6 @@ connection
 //   );
 //   next();
 // });
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
