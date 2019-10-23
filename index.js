@@ -16,7 +16,6 @@ require("dotenv").config();
 //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 //   exposedHeaders: ["x-auth-token"]
 // };
-app.use(cors(corsOptions));
 
 require("./config/auth/facebook");
 require("./config/auth/google");
