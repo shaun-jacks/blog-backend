@@ -11,35 +11,38 @@ const axios = require("axios");
 // const privateKey = fs.readFileSync("../../../../../server.key");
 // const certificate = fs.readFileSync("../../../../../server.crt");
 require("dotenv").config();
-var corsOptions = {
-  origin: "https://shaunjacks.com",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  exposedHeaders: ["x-auth-token"]
-};
+// var corsOptions = {
+//   origin: "https://shaunjacks.com",
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   exposedHeaders: ["x-auth-token"]
+// };
 app.use(cors(corsOptions));
 
 require("./config/auth/facebook");
 require("./config/auth/google");
 
 const whitelist = [
-  "https://localhost:8000",
-  "http://localhost:8000",
-  "http://localhost",
-  "https://devshaun.netlify.com"
+  "https://shaunjacks.com",
+  "https://www.shaunjacks.com",
+  "https://blog-shaun.web.app",
+  "https://blog-shaun.firebaseapp.com",
+  "https://shaunjacks.com/",
+  "https://www.shaunjacks.com/",
+  "https://blog-shaun.web.app/",
+  "https://blog-shaun.firebaseapp.com/"
 ];
-
-// var corsOptions = {
-// origin: function(origin, callback) {
-//   if (whitelist.indexOf(origin) !== -1) {
-//     callback(null, true);
-//   } else {
-//     callback(new Error("Not allowed by CORS"));
-//   }
-// },
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   credentials: true,
-//   exposedHeaders: ["x-auth-token"]
-// };
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  exposedHeaders: ["x-auth-token"]
+};
+app.use(cors(corsOptions));
 
 // const corsOptions = {
 //   credentials: true,
