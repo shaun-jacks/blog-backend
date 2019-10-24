@@ -13,7 +13,6 @@ passport.use(
     },
     async function(req, accessToken, refreshToken, profile, done) {
       console.log("FACEBOOK OAUTH CALLED");
-      console.log(profile);
       const providerID = profile.id;
       const email = profile.emails[0].value;
       const name = profile.displayName;
@@ -22,7 +21,6 @@ passport.use(
       let user = await User.findOne({
         email
       }).exec();
-      console.log(user);
       // Register if not signed up
       if (_.isEmpty(user)) {
         // console.log(`Registering Facebook user to db`);
@@ -34,7 +32,6 @@ passport.use(
           isRegistered: true
         });
         user = await user.save();
-        console.log(user);
         return done(null, user);
       }
       // pass user to req object

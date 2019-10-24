@@ -12,8 +12,7 @@ passport.use(
       passReqToCallback: true
     },
     async function(req, accessToken, refreshToken, profile, done) {
-      console.log("HERE");
-      console.log(profile);
+      console.log("GOOGLE AUTH CALLED");
       const providerID = profile.id;
       const email = profile.emails[0].value;
       const name = profile.displayName;
@@ -21,7 +20,6 @@ passport.use(
       let user = await User.findOne({
         email
       }).exec();
-      console.log(user);
       // Register if not signed up
       if (_.isEmpty(user)) {
         console.log(`Registering Google user to db`);
