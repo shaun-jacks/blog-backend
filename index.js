@@ -4,19 +4,9 @@ const cors = require("cors");
 const mongoConnect = require("./models/index");
 const passport = require("passport");
 const helmet = require("helmet");
-const https = require("https");
-const fs = require("fs");
-const axios = require("axios");
 
-// const privateKey = fs.readFileSync("../../../../../server.key");
-// const certificate = fs.readFileSync("../../../../../server.crt");
+
 require("dotenv").config();
-// var corsOptions = {
-//   origin: "https://shaunjacks.com",
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   exposedHeaders: ["x-auth-token"]
-// };
-
 require("./config/auth/facebook");
 require("./config/auth/google");
 
@@ -30,6 +20,7 @@ const whitelist = [
   "https://blog-shaun.web.app/",
   "https://blog-shaun.firebaseapp.com/"
 ];
+
 const corsOptions = {
   origin: function(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -43,10 +34,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// const corsOptions = {
-//   credentials: true,
-// };
-// auth routes
+
 const authFacebook = require("./routes/api/auth/facebook");
 const authGoogle = require("./routes/api/auth/google");
 
@@ -63,27 +51,10 @@ connection
   .on("disconnected", mongoConnect)
   .once("open", async () => {
     const PORT = process.env.PORT || "3000";
-    // https
-    //   .createServer(
-    //     {
-    //       key: privateKey,
-    //       cert: certificate,
-    //       passphrase: process.env.passphrase
-    //     },
-    //     app
-    //   )
-    //   .listen(PORT);
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
   });
 
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:8000");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());

@@ -1,17 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const likeScema = new Schema({
-  userId: {
-    type: String,
-    default: "",
-    required: [true]
-  },
-  name: {
-    type: String,
-    required: [true, "Must have name"]
-  }
-});
 
 const CommentSchema = new Schema(
   {
